@@ -1,0 +1,12 @@
+{
+  "autoload": {
+    "psr-4": {
+      "db\\Connection\\": "src/db/Connection",
+      "app\\": "src/app",
+      "utils\\": "src/utils"
+    }
+  },
+  "require": {
+    "vlucas/phpdotenv": "^5.5"
+  }
+}
