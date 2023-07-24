@@ -1,4 +1,4 @@
-# Library Management SYstem
+# Library Management System
 
 Database: MariaDB Mysql
 Programming Style: OOP / PDO
