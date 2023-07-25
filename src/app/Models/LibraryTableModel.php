@@ -47,7 +47,7 @@ class LibraryTableOpModel
         }
 
         if ($alterStatement === "") {
-            throw new \InvalidArgumentException("No alter statement specified; kindly provide change required.");
+            throw new \InvalidArgumentException("No alter statement specified; kindly provide required change statement.");
         }
 
         return $this->dbTable->alterTable(tableName: $tableName, alterStatement: $alterStatement);

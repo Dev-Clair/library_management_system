@@ -34,7 +34,7 @@ class LibraryTableOpModel
         }
 
         if ($sanitizedData === "") {
-            throw new \InvalidArgumentException("No user data specified; kindly provide an associative array of the new user's data.");
+            throw new \InvalidArgumentException("No data specified; kindly provide missing array argument.");
         }
 
         return $this->dbTableOp->createRecords(tableName: $tableName, sanitizedData: $sanitizedData);
@@ -90,7 +90,7 @@ class LibraryTableOpModel
         }
 
         if ($sanitizedData === "") {
-            throw new \InvalidArgumentException("No user data specified; kindly provide an associative array of the new user's data.");
+            throw new \InvalidArgumentException("No data specified; kindly provide missing array argument.");
         }
 
         if ($fieldName === "") {
@@ -104,7 +104,7 @@ class LibraryTableOpModel
         return $this->dbTableOp->updateRecord(tableName: $tableName, sanitizedData: $sanitizedData, referenceFieldName: $fieldName, referenceFieldValue: $fieldValue);
     }
 
-    public function deleteRecord(string $tableName = "users", string $fieldName, mixed $fieldValue): bool
+    public function deleteRecord(string $tableName, string $fieldName, mixed $fieldValue): bool
     {
         if ($tableName === "") {
             throw new \InvalidArgumentException("No table name specified; kindly provide a table name.");
