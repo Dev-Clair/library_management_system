@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace app\Controller;
+// namespace app\Controller;
 
 use app\Model\LibraryTableOpModel;
+use app\Controller\Controller;
 
-class UserController
+class UserController extends Controller
 {
     public function index()
     {
@@ -14,7 +15,7 @@ class UserController
          * Logic to retrieve users and pass them to the view
          * Renders the view for listing users
          */
-        $userModel = new LibraryTableOpModel();
+        $userModel = new LibraryTableOpModel("users");
         $users = $userModel->retrieveAllRecords("users");
 
         // Render the view for displaying users
@@ -65,7 +66,6 @@ class UserController
     public function delete()
 
     {
-        // Redirect back to the index page or show success message
         /**
          * Logic for deleting user.
          * Handles the action to delete a user from the system.
