@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace app\Controller;
 
-interface ControllerInt
+interface ControllerInterface
 {
     public function index();
     public function create();
