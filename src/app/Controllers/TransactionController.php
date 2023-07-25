@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-// namespace app\Controller;
+namespace app\Controller;
 
 use app\Model\LibraryTableOpModel;
 use app\Controller\Controller;
