@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace src\utils;
+
 trait FormInputAttributes
 {
     /** Additional Form Input Attributes */
@@ -35,19 +37,20 @@ trait FormInputAttributes
         return trim($attribute);
     }
 }
+
 interface FormDiv
 {
     public function formDiv(?string $divID = null, ?string $divClass = null): void;
 }
 
-interface StatusAlert
+interface ErrorAlert
 {
-    public function statusAlert(?string $alertType = null, ?string $alertMsg = null): void;
+    public function errorAlert(?string $alertType = null, ?string $alertMsg = null): void;
 }
 
-interface FieldAlert
+interface FieldErrorAlert
 {
-    public function fieldAlert(?string $alertClass = null, ?string $alertMsg = null): void;
+    public function fieldErrorAlert(?string $alertClass = null, ?string $alertMsg = null): void;
 }
 
 interface FormLabel
@@ -55,34 +58,34 @@ interface FormLabel
     public function formLabel(?string $labelID = null, ?string $labelClass = null, ?string $labelTitle = null): void;
 }
 
-interface FormFieldInput
+interface FormField
 {
-    public function formFieldInput(?string $inputID = null, ?string $inputName = null, ?string $inputType = null, ?string $inputClass = null, ?string $inputPlaceholder = null, ?string $value = null, ?string $autocomplete = "off", ?string $max = null, ?string $min = null, ?string $step = null, ?string $maxlength = null, ?string $minlength = null, ?string $required = null, ?string $disabled = null): void;
+    public function formField(?string $inputID = null, ?string $inputName = null, ?string $inputType = null, ?string $inputClass = null, ?string $inputPlaceholder = null, ?string $value = null, ?string $autocomplete = "off", ?string $max = null, ?string $min = null, ?string $step = null, ?string $maxlength = null, ?string $minlength = null, ?string $required = null, ?string $disabled = null): void;
 }
 
-interface FormRadioInput
+interface FormRadio
 {
-    public function formRadioInput(?string $inputID = null, ?string $inputName = null, ?string $inputType = null, ?string $inputClass = null, ?string $inputValue = null, ?string $checked = null, ?string $disabled = null): void;
+    public function formRadio(?string $inputID = null, ?string $inputName = null, ?string $inputType = null, ?string $inputClass = null, ?string $inputValue = null, ?string $checked = null, ?string $disabled = null): void;
 }
 
-interface FormCheckBoxInput
+interface FormCheckBox
 {
-    public function formCheckBoxInput(?string $inputID = null, ?string $inputName = null, ?string $inputType = null, ?string $inputClass = null, ?string $inputValue = null, ?string $checked = null, ?string $disabled = null): void;
+    public function formCheckBox(?string $inputID = null, ?string $inputName = null, ?string $inputType = null, ?string $inputClass = null, ?string $inputValue = null, ?string $checked = null, ?string $disabled = null): void;
 }
 
 interface FormFileUpload
 {
-    public function formFileUploadInput(?string $fileInputID = null, ?string $fileInputName = null, ?string $fileInputClass = null, ?string $acceptFileType = null, ?string $multiple = null, ?string $disabled = null): void;
+    public function formFileUpload(?string $fileInputID = null, ?string $fileInputName = null, ?string $fileInputClass = null, ?string $acceptFileType = null, ?string $multiple = null, ?string $disabled = null): void;
 }
 
-interface FormSelectInput
+interface FormSelect
 {
-    public function formSelectInput(?string $selectID = null, ?string $selectName = null, ?string $selectClass = null, array $options = [], ?string $selectedValue = null, ?string $disabled = null): void;
+    public function formSelect(?string $selectID = null, ?string $selectName = null, ?string $selectClass = null, array $options = [], ?string $selectedValue = null, ?string $disabled = null): void;
 }
 
-interface FormTextAreaInput
+interface FormTextArea
 {
-    public function formTextAreaInput(?string $textareaID = null, ?string $textareaName = null, ?string $textareaClass = null, ?string $textareaPlaceholder = null, ?string $rows = null, ?string $cols = null, ?string $disabled = null): void;
+    public function formTextArea(?string $textareaID = null, ?string $textareaName = null, ?string $textareaClass = null, ?string $textareaPlaceholder = null, ?string $rows = null, ?string $cols = null, ?string $disabled = null): void;
 }
 
 interface FormButton
@@ -91,7 +94,7 @@ interface FormButton
 }
 
 /** Form */
-class Form implements FormDiv, StatusAlert, FieldAlert, FormLabel, FormFieldInput, FormRadioInput, FormCheckBoxInput, FormFileUpload, FormSelectInput, FormTextAreaInput, FormButton
+class Form implements FormDiv, ErrorAlert, FieldErrorAlert, FormLabel, FormField, FormRadio, FormCheckBox, FormFileUpload, FormSelect, FormTextArea, FormButton
 {
     use FormInputAttributes;
 
@@ -102,12 +105,12 @@ class Form implements FormDiv, StatusAlert, FieldAlert, FormLabel, FormFieldInpu
         $this->form = "<form id=\"$formID\" name=\"$formName\" method=\"$formMethod\" action=\"$formAction\" enctype=\"$enctype\">";
     }
 
-    public function statusAlert(?string $alertType = null, ?string $alertMsg = null): void
+    public function errorAlert(?string $alertType = null, ?string $alertMsg = null): void
     {
         $this->form .= "<div class=\"alert alert-$alertType\" role=\"alert\">$alertMsg</div>";
     }
 
-    public function fieldAlert(?string $alertClass = null, ?string $alertMsg = null): void
+    public function fieldErrorAlert(?string $alertClass = null, ?string $alertMsg = null): void
     {
         $this->form .= "<small class=\"$alertClass\"> $alertMsg </small>";
     }
@@ -122,27 +125,27 @@ class Form implements FormDiv, StatusAlert, FieldAlert, FormLabel, FormFieldInpu
         $this->form .= "<label for=\"$labelID\" class=\"$labelClass\"><strong>$labelTitle</strong></label>";
     }
 
-    public function formFieldInput(?string $inputID = null, ?string $inputName = null, ?string $inputType = null, ?string $inputClass = null, ?string $inputPlaceholder = null, ?string $value = null, ?string $autocomplete = "off", ?string $max = null, ?string $min = null, ?string $step = null, ?string $maxlength = null, ?string $minlength = null, ?string $required = null, ?string $disabled = null): void
+    public function formField(?string $inputID = null, ?string $inputName = null, ?string $inputType = null, ?string $inputClass = null, ?string $inputPlaceholder = null, ?string $value = null, ?string $autocomplete = "off", ?string $max = null, ?string $min = null, ?string $step = null, ?string $maxlength = null, ?string $minlength = null, ?string $required = null, ?string $disabled = null): void
     {
         $this->form .= "<input id=\"$inputID\" name=\"$inputName\" type=\"$inputType\" class=\"$inputClass\" placeholder=\"$inputPlaceholder\"" . $this->formInputAttributes(value: $value, autocomplete: $autocomplete, max: $max, min: $min, step: $step, maxlength: $maxlength, minlength: $minlength, required: $required, disabled: $disabled) . ">";
     }
 
-    public function formRadioInput(?string $inputID = null, ?string $inputName = null, ?string $inputType = null, ?string $inputClass = null, ?string $inputValue = null, ?string $checked = null, ?string $disabled = null): void
+    public function formRadio(?string $inputID = null, ?string $inputName = null, ?string $inputType = null, ?string $inputClass = null, ?string $inputValue = null, ?string $checked = null, ?string $disabled = null): void
     {
         $this->form .= "<input id=\"$inputID\" name=\"$inputName\" type=\"$inputType\" class=\"$inputClass\" value=\"$inputValue\"" . $this->formInputAttributes(checked: $checked, disabled: $disabled) . ">";
     }
 
-    public function formCheckBoxInput(?string $inputID = null, ?string $inputName = null, ?string $inputType = null, ?string $inputClass = null, ?string $inputValue = null, ?string $checked = null, ?string $disabled = null): void
+    public function formCheckBox(?string $inputID = null, ?string $inputName = null, ?string $inputType = null, ?string $inputClass = null, ?string $inputValue = null, ?string $checked = null, ?string $disabled = null): void
     {
         $this->form .= "<input id=\"$inputID\" name=\"$inputName\" type=\"$inputType\" class=\"$inputClass\" value=\"$inputValue\"" . $this->formInputAttributes(checked: $checked, disabled: $disabled) . ">";
     }
 
-    public function formFileUploadInput(?string $fileInputID = null, ?string $fileInputName = null, ?string $fileInputClass = null, ?string $acceptFileType = null, ?string $multiple = null, ?string $disabled = null): void
+    public function formFileUpload(?string $fileInputID = null, ?string $fileInputName = null, ?string $fileInputClass = null, ?string $acceptFileType = null, ?string $multiple = null, ?string $disabled = null): void
     {
         $this->form .= "<input id=\"$fileInputID\" name=\"$fileInputName\" type=\"file\" class=\"$fileInputClass\" accept=\"$acceptFileType\"" . $this->formInputAttributes(disabled: $disabled) . ">";
     }
 
-    public function formSelectInput(?string $selectID = null, ?string $selectName = null, ?string $selectClass = null, array $options = [], ?string $selectedValue = null, ?string $disabled = null): void
+    public function formSelect(?string $selectID = null, ?string $selectName = null, ?string $selectClass = null, array $options = [], ?string $selectedValue = null, ?string $disabled = null): void
     {
         $selectOptions = "";
         foreach ($options as $value => $label) {
@@ -155,7 +158,7 @@ class Form implements FormDiv, StatusAlert, FieldAlert, FormLabel, FormFieldInpu
                         </select>";
     }
 
-    public function formTextAreaInput(?string $textareaID = null, ?string $textareaName = null, ?string $textareaClass = null, ?string $textareaPlaceholder = null, ?string $rows = null, ?string $cols = null, ?string $disabled = null): void
+    public function formTextArea(?string $textareaID = null, ?string $textareaName = null, ?string $textareaClass = null, ?string $textareaPlaceholder = null, ?string $rows = null, ?string $cols = null, ?string $disabled = null): void
     {
         $this->form .= "<textarea id=\"$textareaID\" name=\"$textareaName\" class=\"$textareaClass\" placeholder=\"$textareaPlaceholder\" rows=\"$rows\" cols=\"$cols\"" . $this->formInputAttributes(disabled: $disabled) . "></textarea>";
     }
@@ -165,9 +168,14 @@ class Form implements FormDiv, StatusAlert, FieldAlert, FormLabel, FormFieldInpu
         $this->form .= "<button id=\"$buttonID\" name=\"$buttonName\" type=\"$buttonType\" class=\"$buttonClass\">$buttonTitle</button>";
     }
 
-    public function render(): string
+    // public function render(): string
+    // {
+    //     $this->form .= "</form>";
+    //     return $this->form;
+    // }
+
+    public function __toString()
     {
-        $this->form .= "</form>";
-        return $this->form;
+        return $this->form .= "</form>";
     }
 }
