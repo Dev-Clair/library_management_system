@@ -33,7 +33,7 @@ class DbTableOp extends DbTable
         }
     }
 
-    public function validateRecord(string $tableName, $fieldName, $fieldValue): bool
+    public function validateRecord(string $tableName, string $fieldName, mixed $fieldValue): bool
     {
         $sql_query = "SELECT * FROM $tableName WHERE $fieldName = ?";
 
@@ -58,7 +58,7 @@ class DbTableOp extends DbTable
         }
     }
 
-    public function retrieveSingleValue(string $tableName, $fieldName, $fieldValue): int|string|bool|array|null
+    public function retrieveSingleValue(string $tableName, string $fieldName, mixed $fieldValue): int|string|bool|array|null
     {
         $sql_query = "SELECT $fieldName FROM $tableName WHERE $fieldName = ?";
 
@@ -74,7 +74,7 @@ class DbTableOp extends DbTable
         }
     }
 
-    public function retrieveMultipleValues(string $tableName, string $fieldName, string $compareFieldName, $compareFieldValue): array
+    public function retrieveMultipleValues(string $tableName, string $fieldName, string $compareFieldName, mixed $compareFieldValue): array
     {
         $sql_query = "SELECT $fieldName FROM $tableName WHERE $compareFieldName = ?";
         try {
@@ -86,7 +86,7 @@ class DbTableOp extends DbTable
         }
     }
 
-    public function retrieveSingleRecord(string $tableName, string $fieldName, $fieldValue): array
+    public function retrieveSingleRecord(string $tableName, string $fieldName, mixed $fieldValue): array
     {
         $sql_query = "SELECT * FROM $tableName WHERE $fieldName = ?";
 
@@ -99,16 +99,16 @@ class DbTableOp extends DbTable
         }
     }
 
-    public function updateRecord(string $tableName, array $sanitizedData, string $fieldName, $fieldValue): bool
+    public function updateRecord(string $tableName, array $sanitizedData, string $referenceFieldName, mixed $referenceFieldValue): bool
     {
         $updateFields = implode(",", array_map(function ($column) {
             return "`$column`=?";
         }, array_keys($sanitizedData)));
 
-        $sql_query = "UPDATE $tableName SET $updateFields WHERE $fieldName = ?";
+        $sql_query = "UPDATE $tableName SET $updateFields WHERE $referenceFieldName = ?";
 
         $params = array_values($sanitizedData);
-        $params[] = $fieldValue;
+        $params[] = $referenceFieldValue;
 
         try {
             $this->executeQuery(sql: $sql_query, params: $params);
@@ -118,7 +118,7 @@ class DbTableOp extends DbTable
         }
     }
 
-    public function deleteRecord(string $tableName, string $fieldName, string $fieldValue): bool
+    public function deleteRecord(string $tableName, string $fieldName, mixed $fieldValue): bool
     {
         $sql_query = "DELETE FROM $tableName WHERE $fieldName = ?";
 

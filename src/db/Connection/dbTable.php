@@ -63,7 +63,6 @@ class DbTable
         }
     }
 
-
     /**
      * @param string $tableName Name of the table to be truncated in the database
      * @return bool True if the table was truncated successfully, false otherwise
