@@ -7,10 +7,9 @@ require_once __DIR__ . '/../components/head.php';
 ?>
 
 <?php
-
 // Instantiate Form and Create Form Members
 $newForm = new Form();
-$newForm->createForm(formID: "editUser", formName: "editUser", formMethod: "post", formAction: "");
+$newForm->createForm(formID: "editUser", formName: "editUser", formMethod: "post", formAction: $formAction, enctype: "");
 if (isset($_SESSION['errorAlertMsg'])) {
     $errorAlertMsg = sprintf("%s", $_SESSION['errorAlertMsg']);
     $newForm->errorAlert("danger", $errorAlertMsg);
