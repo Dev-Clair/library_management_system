@@ -9,7 +9,7 @@ use db\Connection\DbTable;
 
 class LibraryTableOpModel
 {
-    private array $databaseNames = ['users', 'books', 'transactions']; // Contains a list of all database for the library
+    private array $databaseNames = ['users', 'books', 'transactions']; // Contains a list of all databases for the library
     private ?string $databaseName;
     private DbTable $dbTable;
 
@@ -47,7 +47,7 @@ class LibraryTableOpModel
         }
 
         if ($alterStatement === "") {
-            throw new \InvalidArgumentException("No alter statement specified; kindly provide required change statement.");
+            throw new \InvalidArgumentException("No alter statement specified; kindly provide required change statement to alter table.");
         }
 
         return $this->dbTable->alterTable(tableName: $tableName, alterStatement: $alterStatement);

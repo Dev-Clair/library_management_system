@@ -45,18 +45,17 @@ class UserController extends Controller
     public function edit()
     {
         /** 
-         * Logic to store the newly created user in the database
          * Shows a form to edit an existing user's information.
          * Retrieves the user information from the UserModel based on the user details provided in the URL.
          * Renders the view (views/user/edit.php) containing the edit form, and pre-fills the form fields with the user's current information
          * Redirect back to the index page with success message
          */
+        include 'views/user/edit.php';
     }
 
     public function update()
     {
         /**
-         * Logic to store the newly created user in the database.
          * Processes the data submitted through the edit form.
          * Handles data validation, and updates the user's information in the database using the UserModel
          * Redirect back to the index page with success message
