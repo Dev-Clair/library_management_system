@@ -11,11 +11,11 @@ try {
     $router = new Router();
 
     $router->get('/UserController', [app\Controller\UserController::class, 'index'])
-        ->get('/UserController/index', [app\Controller\UserController::class, 'index'])
-        ->get('/UserController/create', [app\Controller\UserController::class, 'create'])
-        ->post('/UserController/store', [app\Controller\UserController::class, 'store'])
-        ->get('/UserController/edit', [app\Controller\UserController::class, 'edit'])
-        ->post('/UserController/store', [app\Controller\UserController::class, 'update']);
+        ->get('/UserController', [app\Controller\UserController::class, 'index'])
+        ->get('/UserController', [app\Controller\UserController::class, 'create'])
+        ->post('/UserController', [app\Controller\UserController::class, 'store'])
+        ->get('/UserController', [app\Controller\UserController::class, 'edit'])
+        ->post('/UserController', [app\Controller\UserController::class, 'update']);
 
     $result = $router->resolve($_SERVER['REQUEST_URI'], strtolower($_SERVER['REQUEST_METHOD']));
     echo $result;
