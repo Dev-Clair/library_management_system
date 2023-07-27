@@ -16,7 +16,7 @@ class UserController extends Controller
          * Renders the view for listing users
          */
         $userModel = new LibraryTableOpModel("users");
-        // $users = $userModel->retrieveAllRecords("users");
+        $users = $userModel->retrieveAllRecords(tableName: "users");
 
         // Render the view for displaying users
         require __DIR__ . '/../Views/user/index.php';
@@ -43,7 +43,7 @@ class UserController extends Controller
          * Handles data validation, and stores the new user in the database using the UserModel.
          * Redirect back to the index page with success or error message
          */
-        if ($_SERVER['REQUES_METHOD'] === "POST") {
+        if ($_SERVER['REQUEST_METHOD'] === "POST") {
             if (isset($_POST['submitcreateUser'])) {
                 $errors = []; // Declare empty array variable to store errors
                 $validInputs = []; // Declare empty array variable to store valid userinputs
@@ -87,7 +87,7 @@ class UserController extends Controller
          * Handles data validation, and updates the user's information in the database using the UserModel
          * Redirect back to the index page with success or error message
          */
-        if ($_SERVER['REQUES_METHOD'] === "POST") {
+        if ($_SERVER['REQUEST_METHOD'] === "POST") {
             if (isset($_POST['submiteditUser'])) {
                 $errors = []; // Declare empty array variable to store errors
                 $validInputs = []; // Declare empty array variable to store valid userinputs
@@ -110,7 +110,7 @@ class UserController extends Controller
         }
         // Retrieve Existing Record Data
         $userModel = new LibraryTableOpModel("users");
-        // $users = $userModel->retrieveSingleRecord(tableName: "users", fieldName: $fieldName, fieldValue: $fieldValue);
+        $users = $userModel->retrieveSingleRecord(tableName: "users", fieldName: $fieldName = null, fieldValue: $fieldValue = null);
         header('Location: ./../Views/user/index.php');
     }
 

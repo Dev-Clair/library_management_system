@@ -1,7 +1,7 @@
 <!-- views/user/edit.php -->
 <?php
 
-use src\utils\Form;
+use utils\Form;
 
 require_once __DIR__ . '/../components/head.php';
 ?>

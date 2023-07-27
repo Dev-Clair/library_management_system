@@ -31,14 +31,16 @@ class DbResource
     /******* Create/Drop/Truncate/Alter Table ******/
     public static function getTableConnection(?string $databaseName = null): DbTable
     {
-        $conn = self::getConnection($databaseName);
+        // $conn = self::getConnection($databaseName);
+        $conn = static::getConnection($databaseName);
         return new DbTable($conn);
     }
 
     /******* Table Read and Write Operations ******/
     public static function getTableOpConnection(?string $databaseName = null): DbTableOp
     {
-        $conn = self::getConnection($databaseName);
+        // $conn = self::getConnection($databaseName);
+        $conn = static::getConnection($databaseName);
         return new DbTableOp($conn);
     }
 }

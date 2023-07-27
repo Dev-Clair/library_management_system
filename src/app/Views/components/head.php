@@ -22,12 +22,6 @@
         </nav>
 
         <nav class="flex-right btn-grp">
-            <?php
-            // $pageview = basename($_SERVER['PHP_SELF']) === 'admin.php' ? 'Main' : 'Admin';
-            // $pagelink = ($pageview === 'Main') ? "main" : strtolower("Admin");
-            ?>
-            <!-- <a class="btn text-white mr-2" href="./<?php echo $pagelink; ?>.php"><strong><?php echo $pageview; ?></strong></a>
-            <a class="btn text-white mr-2" href="./profile.php" onclick="event.preventDefault()"><strong><?php echo $_SESSION['userID']; ?></strong></a> -->
             <a class="btn text-white mr-2" href="./logout.php"><strong>Log out</strong></a>
         </nav>
 
