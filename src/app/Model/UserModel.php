@@ -47,6 +47,8 @@ class UserModel extends MainModel
             throw new \InvalidArgumentException("No field value specified; kindly provide reference field value.");
         }
 
+        $fieldName = "`$fieldName`";
+
         return $this->dbTableOp->retrieveSingleRecord(tableName: $tableName, fieldName: $fieldName, fieldValue: $fieldValue);
     }
 
@@ -63,6 +65,8 @@ class UserModel extends MainModel
         if (empty($fieldValue)) {
             throw new \InvalidArgumentException("No field value specified; kindly provide reference field value.");
         }
+
+        $fieldName = "`$fieldName`";
 
         return $this->dbTableOp->validateRecord(tableName: $tableName, fieldName: $fieldName, fieldValue: $fieldValue);
     }
@@ -103,6 +107,8 @@ class UserModel extends MainModel
         if (empty($fieldValue)) {
             throw new \InvalidArgumentException("No field value specified; kindly provide reference field value.");
         }
+
+        $fieldName = "`$fieldName`";
 
         return $this->dbTableOp->deleteRecord(tableName: $tableName, fieldName: $fieldName, fieldValue: $fieldValue);
     }

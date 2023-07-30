@@ -69,7 +69,8 @@ $tableName = "";
 $databaseName = "";
 // $conn = new UserModel(databaseName: $databaseName);
 // $result = $conn->retrieveSingleUser(tableName: $tableName, fieldName: $fieldName, fieldValue: $fieldValue);
-// echo "Retrieving single value in $tableName: " . $result . PHP_EOL;
+// echo "Retrieving single user in $tableName: " . PHP_EOL;
+// var_dump($result);
 
 /** *************************************************************************************
  * 
