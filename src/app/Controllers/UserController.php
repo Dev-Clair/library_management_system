@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace app\Controller;
 
-use app\Model\LibraryTableOpModel;
+use app\Model\UserModel;
 use app\Controller\Controller;
 
 class UserController extends Controller
@@ -15,8 +15,10 @@ class UserController extends Controller
          * Logic to retrieve users and pass them to the view
          * Renders the view for listing users
          */
-        $userModel = new LibraryTableOpModel("users");
-        $users = $userModel->retrieveAllRecords(tableName: "users");
+        $databaseName = "";
+        $userModel = new UserModel(databaseName: $databaseName);
+        $tableName = "";
+        $users = $userModel->retrieveAllUsers(tableName: $tableName);
 
         // Render the view for displaying users
         require __DIR__ . '/../Views/user/index.php';
@@ -109,8 +111,12 @@ class UserController extends Controller
             }
         }
         // Retrieve Existing Record Data
-        $userModel = new LibraryTableOpModel("users");
-        $users = $userModel->retrieveSingleRecord(tableName: "users", fieldName: $fieldName = null, fieldValue: $fieldValue = null);
+        $databaseName = "";
+        $userModel = new UserModel(databaseName: $databaseName);
+        $tableName = "";
+        $fieldName = "";
+        $fieldValue = "";
+        $users = $userModel->retrieveSingleuser(tableName: $tableName, fieldName: $fieldName, fieldValue: $fieldValue);
         header('Location: ./../Views/user/index.php');
     }
 

@@ -7,11 +7,11 @@ namespace app\Model;
 use db\DbResource;
 use db\Connection\DbTable;
 
-class LibraryTableOpModel
+class AdminModel
 {
-    private array $databaseNames = ['users', 'books', 'transactions']; // Contains a list of all databases for the library
-    private ?string $databaseName;
-    private DbTable $dbTable;
+    protected array $databaseNames = ['libraryStaffs', 'libraryOperations', 'libraryFinance', 'libraryRecords']; // Contains a list of all databases for the library
+    protected ?string $databaseName;
+    protected DbTable $dbTable;
 
     public function __construct(?string $databaseName = null)
     {
@@ -27,13 +27,13 @@ class LibraryTableOpModel
         $this->dbTable = DbResource::getTableConnection($this->databaseName);
     }
 
-    public function createtable(string $tableName, string $fieldNames): bool
+    public function createTable(string $tableName, string $fieldNames): bool
     {
-        if ($tableName === "") {
-            throw new \InvalidArgumentException("No table name specified; kindly provide a table name.");
+        if (empty($tableName)) {
+            throw new \InvalidArgumentException("No table name specified; kindly provide a valid table name.");
         }
 
-        if ($fieldNames === "") {
+        if (empty($fieldNames)) {
             throw new \InvalidArgumentException("No field names specified; kindly provide fieldnames required.");
         }
 
@@ -42,11 +42,11 @@ class LibraryTableOpModel
 
     public function alterTable(string $tableName, string $alterStatement): bool
     {
-        if ($tableName === "") {
-            throw new \InvalidArgumentException("No table name specified; kindly provide a table name.");
+        if (empty($tableName)) {
+            throw new \InvalidArgumentException("No table name specified; kindly provide a valid table name.");
         }
 
-        if ($alterStatement === "") {
+        if (empty($alterStatement)) {
             throw new \InvalidArgumentException("No alter statement specified; kindly provide required change statement to alter table.");
         }
 
@@ -55,8 +55,8 @@ class LibraryTableOpModel
 
     public function truncateTable(string $tableName): bool
     {
-        if ($tableName === "") {
-            throw new \InvalidArgumentException("No table name specified; kindly provide a table name.");
+        if (empty($tableName)) {
+            throw new \InvalidArgumentException("No table name specified; kindly provide a valid table name.");
         }
 
         return $this->dbTable->truncateTable(tableName: $tableName);
@@ -64,8 +64,8 @@ class LibraryTableOpModel
 
     public function dropTable(string $tableName): bool
     {
-        if ($tableName === "") {
-            throw new \InvalidArgumentException("No table name specified; kindly provide a table name.");
+        if (empty($tableName)) {
+            throw new \InvalidArgumentException("No table name specified; kindly provide a valid table name.");
         }
 
         return $this->dbTable->dropTable(tableName: $tableName);
