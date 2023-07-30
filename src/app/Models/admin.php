@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace app\Model;
+// namespace app\Model;
 
 use db\DbResource;
 use app\Model\AdminModel;
 
-require __DIR__ . '/../../../vendor/autoload.php';
+require_once __DIR__ . '/../../../vendor/autoload.php';
 
 
 /** *************************************************************************************
@@ -17,13 +17,13 @@ require __DIR__ . '/../../../vendor/autoload.php';
  */
 $databaseNames = ['librarystaffs', 'libraryoperations', 'libraryfinance', 'libraryrecords'];
 $databaseName = $databaseNames[3];
-$dbConn = DbResource::dbConn($databaseName);
+// $dbConn = DbResource::dbConn($databaseName);
 
-if (!$dbConn instanceof \PDO) {
-    throw new \RuntimeException('Connection failed.');
-}
+// if (!$dbConn instanceof \PDO) {
+//     throw new \RuntimeException('Connection failed.');
+// }
 
-$sql_query = "CREATE DATABASE IF NOT EXISTS $databaseName";
+// $sql_query = "CREATE DATABASE IF NOT EXISTS $databaseName";
 // $sql_query = "DROP DATABASE $databaseName";
 
 // if ($dbConn->query($sql_query)) {

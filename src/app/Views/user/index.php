@@ -15,8 +15,8 @@ require_once __DIR__ . '/../components/status.php';
         <thead class="thead-dark">
             <tr>
                 <th>S/n</th>
-                <th>Name</th>
                 <th>Registration No.</th>
+                <th>Name</th>
                 <th>Email</th>
                 <th>Course Name</th>
                 <th>Registration Date</th>
@@ -33,8 +33,8 @@ require_once __DIR__ . '/../components/status.php';
             ?>
                     <tr>
                         <td><?php echo $count; ?></td>
-                        <td><?php echo $row["studentName"]; ?></td>
                         <td><?php echo $row["regNo"]; ?></td>
+                        <td><?php echo $row["studentName"]; ?></td>
                         <td><?php echo $row["email"]; ?></td>
                         <td><?php echo $row["courseName"]; ?></td>
                         <td><?php echo $row["regDate"]; ?></td>
