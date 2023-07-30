@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-// namespace app\Model;
+namespace app\Model;
 
 use db\DbResource;
 use app\Model\AdminModel;
@@ -38,11 +38,10 @@ $databaseName = $databaseNames[3];
  * 
  */
 $tableName = "users";
-$fieldNames = "
-               `regNo.` INT(20) PRIMARY KEY NOT NULL,
+$fieldNames = "`regNo` INT(20) PRIMARY KEY NOT NULL,
                `studentName` VARCHAR(150) NOT NULL,
                `email` VARCHAR(150) UNIQUE NOT NULL,
-               `courseName` VARCHAR() NOT NULL,
+               `courseName` VARCHAR(100) NOT NULL,
                `regDate` VARCHAR(50) NOT NULL,
                `gradDate` VARCHAR(50) NOT NULL,
                `datecreated` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP";
