@@ -34,7 +34,7 @@ class UserController extends Controller
 
         $basePath = str_replace($_SERVER['DOCUMENT_ROOT'], '', realpath(__DIR__ . '/../'));
         $formAction = $basePath . '/Controller/UserController.php?action=store';
-        require __DIR__ . '/../Views/user/create.php';
+        require __DIR__ . '/../View/user/create.php';
     }
 
     public function store()
@@ -66,7 +66,7 @@ class UserController extends Controller
                 /** Image Field */
             }
         }
-        header('Location: ./../Views/user/index.php');
+        header('Location: ./../View/user/index.php');
     }
 
     public function edit()
@@ -79,7 +79,7 @@ class UserController extends Controller
          */
         $basePath = str_replace($_SERVER['DOCUMENT_ROOT'], '', realpath(__DIR__ . '/../'));
         $formAction = $basePath . '/Controller/UserController.php?action=update';
-        require __DIR__ . '/../Views/user/edit.php';
+        require __DIR__ . '/../View/user/edit.php';
     }
 
     public function update()
@@ -118,7 +118,7 @@ class UserController extends Controller
         $fieldValue = "";
         $users = $userModel->retrieveSingleUser(tableName: $tableName, fieldName: $fieldName, fieldValue: $fieldValue);
 
-        header('Location: ./../Views/user/index.php');
+        header('Location: ./../View/user/index.php');
     }
 
     public function delete()
@@ -130,6 +130,6 @@ class UserController extends Controller
          * Retrieves the user information through the URL and delete the user from the database using the UserModel.
          * Redirects to index with success or error message
          */
-        header('Location: ./../Views/user/index.php');
+        header('Location: ./../View/user/index.php');
     }
 }

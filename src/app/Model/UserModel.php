@@ -8,7 +8,7 @@ class UserModel extends MainModel
 {
     public function __construct(protected ?string $databaseName = null)
     {
-        parent::__construct();
+        parent::__construct($databaseName);
     }
 
     public function createUser(string $tableName = "users", array $sanitizedData): bool
@@ -84,6 +84,8 @@ class UserModel extends MainModel
         if (empty($fieldValue)) {
             throw new \InvalidArgumentException("No field value specified; kindly provide reference field value.");
         }
+
+        $fieldName = "`$fieldName`";
 
         return $this->dbTableOp->updateRecord(tableName: $tableName, sanitizedData: $sanitizedData, referenceFieldName: $fieldName, referenceFieldValue: $fieldValue);
     }

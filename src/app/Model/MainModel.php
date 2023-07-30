@@ -12,7 +12,7 @@ abstract class MainModel
     protected array $databaseNames = ['libraryoperations', 'libraryfinance', 'libraryrecords']; // Contains a list of all databases for the library
     protected DbTableOp $dbTableOp;
 
-    public function __construct(private ?string $databaseName = null)
+    public function __construct(private ?string $databaseName)
     {
         // Check if the provided database name is valid
         if ($databaseName !== null && !in_array($databaseName, $this->databaseNames)) {

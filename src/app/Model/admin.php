@@ -17,20 +17,20 @@ require_once __DIR__ . '/../../../vendor/autoload.php';
  */
 $databaseNames = ['librarystaffs', 'libraryoperations', 'libraryfinance', 'libraryrecords'];
 $databaseName = $databaseNames[3];
-// $dbConn = DbResource::dbConn($databaseName);
+$dbConn = DbResource::dbConn($databaseName);
 
-// if (!$dbConn instanceof \PDO) {
-//     throw new \RuntimeException('Connection failed.');
-// }
+if (!$dbConn instanceof \PDO) {
+    throw new \RuntimeException('Connection failed.');
+}
 
-// $sql_query = "CREATE DATABASE IF NOT EXISTS $databaseName";
+$sql_query = "CREATE DATABASE IF NOT EXISTS $databaseName";
 // $sql_query = "DROP DATABASE $databaseName";
 
-// if ($dbConn->query($sql_query)) {
-//     echo "Database operation was successful";
-// } else {
-//     throw new \RuntimeException('Database operation failed');
-// }
+if ($dbConn->query($sql_query)) {
+    echo "Database operation was successful" . PHP_EOL;
+} else {
+    throw new \RuntimeException('Database operation failed' . PHP_EOL);
+}
 
 /** *************************************************************************************
  * 
@@ -38,13 +38,13 @@ $databaseName = $databaseNames[3];
  * 
  */
 $tableName = "users";
-$fieldNames = "`regNo` INT(20) PRIMARY KEY NOT NULL,
-               `studentName` VARCHAR(150) NOT NULL,
-               `email` VARCHAR(150) UNIQUE NOT NULL,
-               `courseName` VARCHAR(100) NOT NULL,
-               `regDate` VARCHAR(50) NOT NULL,
-               `gradDate` VARCHAR(50) NOT NULL,
-               `datecreated` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP";
+$fieldNames = "`Reg No.` INT(20) PRIMARY KEY NOT NULL,
+               `Student Name` VARCHAR(150) NOT NULL,
+               `Email` VARCHAR(150) UNIQUE NOT NULL,
+               `Course Name` VARCHAR(100) NOT NULL,
+               `Registration Date` VARCHAR(50) NOT NULL,
+               `Graduation Date` VARCHAR(50) NOT NULL,
+               `Date Created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP";
 
 $databaseName = "libraryrecords";
 $conn = new AdminModel(databaseName: $databaseName);
