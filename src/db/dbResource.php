@@ -11,7 +11,11 @@ use db\Connection\DbTableOp;
 
 class DbResource
 {
-    /** Establishes and Provides Resource: Connection Object */
+    /** *************************************************************************************
+     * 
+     * Establishes and Provides Resource: Connection Object
+     * 
+     */
     private static function getConnection(?string $databaseName = null)
     {
         $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
@@ -28,7 +32,23 @@ class DbResource
         return $conn->getConnection();
     }
 
-    /******* Create/Drop/Truncate/Alter Table ******/
+    /** *************************************************************************************
+     * 
+     * Provides Resource: Connection Object to Create / Drop Database
+     * 
+     */
+    public static function dbConn(): ?\PDO
+    {
+        // $conn = self::getConnection();
+        $conn = static::getConnection();
+        return $conn;
+    }
+
+    /** *************************************************************************************
+     * 
+     * Provides Resource: Connection Object to Create/Drop/Truncate/Alter Table
+     * 
+     */
     public static function getTableConnection(?string $databaseName = null): DbTable
     {
         // $conn = self::getConnection($databaseName);
@@ -36,7 +56,11 @@ class DbResource
         return new DbTable($conn);
     }
 
-    /******* Table Read and Write Operations ******/
+    /** *************************************************************************************
+     * 
+     * Provides Resource: Connection Object for Table Read and Write Operations
+     * 
+     */
     public static function getTableOpConnection(?string $databaseName = null): DbTableOp
     {
         // $conn = self::getConnection($databaseName);

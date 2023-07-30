@@ -2,145 +2,102 @@
 
 declare(strict_types=1);
 
+namespace app\Model;
+
+use db\DbResource;
 use app\Model\AdminModel;
-use app\Model\MainModel;
-use app\Model\UserModel;
-// use app\Model\BookModel;
-// use app\Model\TransactionModel;
 
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../../../vendor/autoload.php';
 
-/** *******************************************Create Tables***************************************** */
-/** ******* Create Table*******/
-$tableName = "";
-$fieldNames = "`` VARCHAR() PRIMARY KEY NOT NULL,
-               `` VARCHAR() NOT NULL,
-               `` VARCHAR() NOT NULL,
-               `` INT() NOT NULL,
+
+/** *************************************************************************************
+ * 
+ * Create / Drop Databases
+ * 
+ */
+$databaseNames = ['librarystaffs', 'libraryoperations', 'libraryfinance', 'libraryrecords'];
+$databaseName = $databaseNames[3];
+$dbConn = DbResource::dbConn($databaseName);
+
+if (!$dbConn instanceof \PDO) {
+    throw new \RuntimeException('Connection failed.');
+}
+
+$sql_query = "CREATE DATABASE IF NOT EXISTS $databaseName";
+// $sql_query = "DROP DATABASE $databaseName";
+
+// if ($dbConn->query($sql_query)) {
+//     echo "Database operation was successful";
+// } else {
+//     throw new \RuntimeException('Database operation failed');
+// }
+
+/** *************************************************************************************
+ * 
+ * Create Tables
+ * 
+ */
+$tableName = "users";
+$fieldNames = "
+               `regNo.` INT(20) PRIMARY KEY NOT NULL,
+               `studentName` VARCHAR(150) NOT NULL,
+               `email` VARCHAR(150) UNIQUE NOT NULL,
+               `courseName` VARCHAR() NOT NULL,
+               `regDate` VARCHAR(50) NOT NULL,
+               `gradDate` VARCHAR(50) NOT NULL,
                `datecreated` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP";
 
-$databaseName = "";
+$databaseName = "libraryrecords";
 $conn = new AdminModel(databaseName: $databaseName);
-$result = $conn->createTable(tableName: $tableName, fieldNames: $fieldNames);
-echo "Creating table $tableName: ";
-if ($result) {
-    echo "Success" . PHP_EOL;
+$status = $conn->createTable(tableName: $tableName, fieldNames: $fieldNames);
+if ($status) {
+    echo "Creating new $tableName in $databaseName returned: " . "true" . PHP_EOL;
 } else {
-    echo "Failure" . PHP_EOL;
+    echo "Creating new $tableName in $databaseName returned: " . "false" . PHP_EOL;
 }
 
-/** Add Record to Table */
-$newRecord = []; // Record must be passed as an associative array
-$tableName = "";
-$databaseName = "";
-$conn = new UserModel(databaseName: $databaseName);
-$result = $conn->createUser(tableName: $tableName, sanitizedData: $newRecord);
-echo "Creating new record in $tableName: ";
-if ($result) {
-    echo "Success" . PHP_EOL;
-} else {
-    echo "Failure" . PHP_EOL;
-}
-
-/** Validate Record */
-$fieldName = "";
-$fieldValue = "";
-
-$tableName = "";
-$databaseName = "";
-$conn = new UserModel(databaseName: $databaseName);
-$result = $conn->validateUser(tableName: $tableName, fieldName: $fieldName, fieldValue: $fieldValue);
-echo "Validating record in $tableName returns: $result" . PHP_EOL;
-
-/** Retrieve All Table Records */
-$tableName = "";
-$databaseName = "";
-$conn = new UserModel(databaseName: $databaseName);
-$result = $conn->retrieveAllUsers(tableName: $tableName);
-echo "Retrieving all records in $tableName: " . PHP_EOL;
-var_dump($result);
-
-/** Retrieve Single Value from Table Records */
-$fieldName = "";
-$fieldValue = "";
-
-$tableName = "";
-$databaseName = "";
-$conn = new UserModel(databaseName: $databaseName);
-$result = $conn->retrieveSingleUser(tableName: $tableName, fieldName: $fieldName, fieldValue: $fieldValue);
-echo "Retrieving single value in $tableName: " . PHP_EOL;
-var_dump($result);
-
-/** Retrieve Multiple FieldValues from Table Record */
-$fieldName = "";
-$compareFieldName = "";
-$compareFieldValue = "";
-
-$tableName = "";
-$databaseName = "";
-// $conn = new UserModel(databaseName: $databaseName);
-// $result = $conn->retrieveMultipleUser(tableName: $tableName, fieldName: $fieldName, compareFieldName: $compareFieldName, compareFieldValue: $compareFieldValue);
-// echo "Retrieving multple values from $tableName: " . PHP_EOL;
-// var_dump($result);
-
-/** Retrieve Single Table Record */
-$fieldName = "";
-$fieldValue = "";
-
-$tableName = "";
-$databaseName = "";
-$conn = new UserModel(databaseName: $databaseName);
-$result = $conn->retrieveSingleUser(tableName: $tableName, fieldName: $fieldName, fieldValue: $fieldValue);
-echo "Retrieving single record in $tableName: " . PHP_EOL;
-var_dump($result);
-
-/** Update Table Record */
-$record = []; // Record must be passed as an associative array
-$fieldName = "";
-$fieldValue = "";
-
-$tableName = "";
-$databaseName = "";
-$conn = new UserModel(databaseName: $databaseName);
-$result = $conn->updateUser(tableName: $tableName, sanitizedData: $record, fieldName: $fieldName, fieldValue: $fieldValue);
-echo "Updating record in $tableName: ";
-if ($result) {
-    echo "Success" . PHP_EOL;
-} else {
-    echo "Failure" . PHP_EOL;
-}
-
-/** Delete Table Record */
-$fieldName = "";
-$fieldValue = "";
-
-$tableName = "";
-$databaseName = "";
-$conn = new UserModel(databaseName: $databaseName);
-$result = $conn->deleteUser(tableName: $tableName, fieldName: $fieldName, fieldValue: $fieldValue);
-echo "Deleting record in $tableName: ";
-if ($result) {
-    echo "Success" . PHP_EOL;
-} else {
-    echo "Failure" . PHP_EOL;
-}
-
-/** *******************************************Alter Tables***************************************** */
+/** *************************************************************************************
+ * 
+ * Alter Tables
+ * 
+ */
 $databaseName = "";
 $tableName = "";
 $alterStatement = "ADD COLUMN ``  NOT NULL FIRST";
-$conn = new AdminModel(databaseName: $databaseName);
-$result = $conn->alterTable(tableName: $tableName, alterStatement: $alterStatement);
+// $conn = new AdminModel(databaseName: $databaseName);
+// $status = $conn->alterTable(tableName: $tableName, alterStatement: $alterStatement);
+// if ($status) {
+//     echo "Modifying $tableName table in $databaseName returned: " . "true" . PHP_EOL;
+// } else {
+//     echo "Modifying $tableName table in $databaseName returned: " . "false" . PHP_EOL;
+// }
 
-
-/** *******************************************Truncate Tables***************************************** */
+/** *************************************************************************************
+ * 
+ * Truncate Tables
+ * 
+ */
 $databaseName = "";
 $tableName = "";
-$conn = new AdminModel(databaseName: $databaseName);
-$result = $conn->truncateTable(tableName: $tableName);
+// $conn = new AdminModel(databaseName: $databaseName);
+// $status = $conn->truncateTable(tableName: $tableName);
+// if ($status) {
+//     echo "Clearing all $tableName records in $databaseName returned: " . "true" . PHP_EOL;
+// } else {
+//     echo "Clearing all $tableName records in $databaseName returned: " . "false" . PHP_EOL;
+// }
 
-/** *******************************************Drop Tables***************************************** */
+/** *************************************************************************************
+ * 
+ * Drop Tables
+ * 
+ */
 $databaseName = "";
 $tableName = "";
-$conn = new AdminModel(databaseName: $databaseName);
-$result = $conn->dropTable(tableName: $tableName);
+// $conn = new AdminModel(databaseName: $databaseName);
+// $status = $conn->dropTable(tableName: $tableName);
+// if ($status) {
+//     echo "Deleting $tableName in $databaseName returned: " . "true" . PHP_EOL;
+// } else {
+//     echo "Deleting $tableName in $databaseName returned: " . "false" . PHP_EOL;
+// }

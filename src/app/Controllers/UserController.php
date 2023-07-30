@@ -15,9 +15,9 @@ class UserController extends Controller
          * Logic to retrieve users and pass them to the view
          * Renders the view for listing users
          */
-        $databaseName = "";
+        $databaseName = "libraryrecords";
         $userModel = new UserModel(databaseName: $databaseName);
-        $tableName = "";
+        $tableName = "users";
         $users = $userModel->retrieveAllUsers(tableName: $tableName);
 
         // Render the view for displaying users
@@ -111,12 +111,13 @@ class UserController extends Controller
             }
         }
         // Retrieve Existing Record Data
-        $databaseName = "";
+        $databaseName = "libraryRecords";
         $userModel = new UserModel(databaseName: $databaseName);
-        $tableName = "";
+        $tableName = "users";
         $fieldName = "";
         $fieldValue = "";
-        $users = $userModel->retrieveSingleuser(tableName: $tableName, fieldName: $fieldName, fieldValue: $fieldValue);
+        $users = $userModel->retrieveSingleUser(tableName: $tableName, fieldName: $fieldName, fieldValue: $fieldValue);
+
         header('Location: ./../Views/user/index.php');
     }
 

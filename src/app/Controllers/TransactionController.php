@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace app\Controller;
 
-use app\Model\LibraryTableOpModel;
+use app\Model\TransactionModel;
 use app\Controller\Controller;
 
 class TransactionController extends Controller
@@ -15,8 +15,10 @@ class TransactionController extends Controller
          * Logic to retrieve transactions and pass them to the view
          * Renders the view for listing transactions
          */
-        $transactionModel = new LibraryTableOpModel("transactions");
-        $transactions = $transactionModel->retrieveAllRecords("transactions");
+        $databaseName = "libraryRecords";
+        $transactionModel = new TransactionModel(databaseName: $databaseName);
+        $tableName = "transactions";
+        $transactions = $transactionModel->retrieveAllTransactions(tableName: $tableName);
 
         // Render the view for displaying transactions
         include 'views/transaction/index.php';
@@ -61,6 +63,14 @@ class TransactionController extends Controller
          * Handles data validation, and updates the transaction's information in the database using the transactionModel
          * Redirect back to the index page with success message
          */
+        $databaseName = "libraryRecords";
+        $transactionModel = new TransactionModel(databaseName: $databaseName);
+        $tableName = "transaction";
+        $fieldName = "";
+        $fieldValue = "";
+        $transaction = $transactionModel->retrieveSingleTransaction(tableName: $tableName, fieldName: $fieldName, fieldValue: $fieldValue);
+
+        header('Location: ./../Views/transaction/index.php');
     }
 
     public function delete()

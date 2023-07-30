@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace app\Controller;
 
-use app\Model\LibraryTableOpModel;
+use app\Model\BookModel;
 use app\Controller\Controller;
 
 class BookController extends Controller
@@ -15,8 +15,10 @@ class BookController extends Controller
          * Logic to retrieve books and pass them to the view
          * Renders the view for listing books
          */
-        $bookModel = new LibraryTableOpModel("books");
-        $books = $bookModel->retrieveAllRecords("books");
+        $databaseName = "libraryRecords";
+        $bookModel = new BookModel(databaseName: $databaseName);
+        $tableName = "books";
+        $book = $bookModel->retrieveAllBooks(tableName: $tableName);
 
         // Render the view for displaying books
         include 'views/book/index.php';
@@ -61,6 +63,14 @@ class BookController extends Controller
          * Handles data validation, and updates the book's information in the database using the bookModel
          * Redirect back to the index page with success message
          */
+        $databaseName = "libraryRecords";
+        $bookModel = new BookModel(databaseName: $databaseName);
+        $tableName = "books";
+        $fieldName = "";
+        $fieldValue = "";
+        $bookModel = $bookModel->retrieveSingleBook(tableName: $tableName, fieldName: $fieldName, fieldValue: $fieldValue);
+
+        header('Location: ./../Views/book/index.php');
     }
 
     public function delete()

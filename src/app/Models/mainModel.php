@@ -9,11 +9,10 @@ use db\Connection\DbTableOp;
 
 abstract class MainModel
 {
-    protected array $databaseNames = ['libraryOperations', 'libraryFinance', 'libraryRecords']; // Contains a list of all databases for the library
-    protected ?string $databaseName;
+    protected array $databaseNames = ['libraryoperations', 'libraryfinance', 'libraryrecords']; // Contains a list of all databases for the library
     protected DbTableOp $dbTableOp;
 
-    public function __construct(?string $databaseName = null)
+    public function __construct(private ?string $databaseName = null)
     {
         // Check if the provided database name is valid
         if ($databaseName !== null && !in_array($databaseName, $this->databaseNames)) {

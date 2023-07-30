@@ -4,12 +4,17 @@
 use utils\Form;
 
 require_once __DIR__ . '/../components/head.php';
+require_once __DIR__ . '/../../../../vendor/autoload.php';
 ?>
 
 <?php
 // Instantiate Form and Create Form Members
 $newForm = new Form();
-$newForm->createForm(formID: "createUser", formName: "createUser", formMethod: "post", formAction: $formAction, enctype: "");
+
+$basePath = str_replace($_SERVER['DOCUMENT_ROOT'], '', realpath(__DIR__ . '/../'));
+$formAction = $basePath . '/Controller/UserController.php?action=store';
+
+$newForm->createForm(formID: "createUser", formName: "createUser", formMethod: "post", formAction: $formAction, enctype: "multipart/form-data");
 if (isset($_SESSION['errorAlertMsg'])) {
     $errorAlertMsg = sprintf("%s", $_SESSION['errorAlertMsg']);
     $newForm->errorAlert("danger", $errorAlertMsg);

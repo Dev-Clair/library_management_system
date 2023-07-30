@@ -4,11 +4,16 @@
 use utils\Form;
 
 require_once __DIR__ . '/../components/head.php';
+require_once __DIR__ . '/../../../../vendor/autoload.php';
 ?>
 
 <?php
 // Instantiate Form and Create Form Members
 $newForm = new Form();
+
+$basePath = str_replace($_SERVER['DOCUMENT_ROOT'], '', realpath(__DIR__ . '/../'));
+$formAction = $basePath . '/Controller/UserController.php?action=update';
+
 $newForm->createForm(formID: "editUser", formName: "editUser", formMethod: "post", formAction: $formAction, enctype: "");
 if (isset($_SESSION['errorAlertMsg'])) {
     $errorAlertMsg = sprintf("%s", $_SESSION['errorAlertMsg']);
