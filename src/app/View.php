@@ -49,9 +49,6 @@ class View extends stdClass
         }
     }
 
-    /**
-     * @return string
-     */
     public function getviewClassName(): string
     {
         return $this->viewClassName;
@@ -71,7 +68,6 @@ class View extends stdClass
     {
         $this->viewActionName = $viewActionName;
     }
-
 
     private function getPageHeader(): string|false
     {
