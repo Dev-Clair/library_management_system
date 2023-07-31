@@ -55,21 +55,6 @@ class Router
             if (method_exists($class, $method)) {
                 call_user_func_array([$class, $method], []);
             }
-
-            // if (class_exists($class)) {
-            //     $classInstance = new $class();
-
-            //     // Call the method based on the URL route
-            //     if ($route === '/create') {
-            //         $classInstance->$method();
-            //     } elseif ($route === '/edit') {
-            //         $classInstance->$method();
-            //     } elseif ($route === '/store') {
-            //         $classInstance->$method();
-            //     } else {
-            //         $classInstance->index();
-            //     }
-            // }
         }
         throw new RouteNotFoundException();
     }

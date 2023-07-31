@@ -11,7 +11,7 @@ try {
     $router = new Router();
 
     $router->get('/UserController', [app\Controller\UserController::class, 'index'])
-        // ->get('/UserController/index', [app\Controller\UserController::class, 'index'])
+        ->get('/UserController/index', [app\Controller\UserController::class, 'index'])
         ->get('/UserController/create', [app\Controller\UserController::class, 'create'])
         ->post('/UserController/create', [app\Controller\UserController::class, 'store'])
         ->get('/UserController/edit', [app\Controller\UserController::class, 'edit'])

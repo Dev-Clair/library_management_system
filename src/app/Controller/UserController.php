@@ -21,7 +21,9 @@ class UserController extends Controller
         $users = $userModel->retrieveAllUsers(tableName: $tableName);
 
         // Render the view for displaying users
-        require __DIR__ . '/../Views/user/index.php';
+        // require __DIR__ . '/../Views/user/index.php';
+        $this->dataToRender['users'] = $users;
+        echo $this->view->render('index', $this->dataToRender);
     }
 
     protected function create()
