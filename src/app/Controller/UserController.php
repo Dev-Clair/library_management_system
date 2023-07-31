@@ -9,7 +9,7 @@ use app\Controller\Controller;
 
 class UserController extends Controller
 {
-    public function index()
+    protected function index()
     {
         /**
          * Logic to retrieve users and pass them to the view
@@ -24,7 +24,7 @@ class UserController extends Controller
         require __DIR__ . '/../Views/user/index.php';
     }
 
-    public function create()
+    protected function create()
     {
         /**
          * Logic for creating a new user.
@@ -37,7 +37,7 @@ class UserController extends Controller
         require __DIR__ . '/../View/user/create.php';
     }
 
-    public function store()
+    protected function store()
     {
         /**
          * Logic to store the newly created user in the database.
@@ -51,10 +51,7 @@ class UserController extends Controller
                 $validInputs = []; // Declare empty array variable to store valid userinputs
 
                 // Sanitize Userinputs
-                $sanitizedInput = [];
-                foreach ($_POST as $fieldName => $userInput) {
-                    $sanitizedInput[$fieldName] = filter_var($userInput, FILTER_SANITIZE_SPECIAL_CHARS);
-                }
+                $sanitizedInputs = $this->sanitizeUserInputs();
 
                 // Validate Userinputs
                 /** Name Field */
@@ -69,7 +66,7 @@ class UserController extends Controller
         header('Location: ./../View/user/index.php');
     }
 
-    public function edit()
+    protected function edit()
     {
         /** 
          * Shows a form to edit an existing user's information.
@@ -82,7 +79,7 @@ class UserController extends Controller
         require __DIR__ . '/../View/user/edit.php';
     }
 
-    public function update()
+    protected function update()
     {
         /**
          * Processes the data submitted through the edit form.
@@ -95,10 +92,7 @@ class UserController extends Controller
                 $validInputs = []; // Declare empty array variable to store valid userinputs
 
                 // Sanitize Userinputs
-                $sanitizedInput = [];
-                foreach ($_POST as $fieldName => $userInput) {
-                    $sanitizedInput[$fieldName] = filter_var($userInput, FILTER_SANITIZE_SPECIAL_CHARS);
-                }
+                $sanitizedInputs = $this->sanitizeUserInputs();
 
                 // Validate Userinputs
                 /** Name Field */
@@ -121,7 +115,7 @@ class UserController extends Controller
         header('Location: ./../View/user/index.php');
     }
 
-    public function delete()
+    protected function delete()
 
     {
         /**

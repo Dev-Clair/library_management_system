@@ -1,11 +1,4 @@
 <!-- views/user/index.php -->
-<?php
-require_once __DIR__ . '/../components/head.php';
-?>
-
-<?php
-require_once __DIR__ . '/../components/status.php';
-?>
 <h1>Registered Users</h1>
 
 <a href="./create.php" class="btn btn-primary btn-sm">Create User</a>
@@ -57,7 +50,3 @@ require_once __DIR__ . '/../components/status.php';
         </tbody>
     </table>
 </div>
-
-<?php
-require_once __DIR__ . '/../components/footer.php';
-?>

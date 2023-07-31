@@ -3,7 +3,6 @@
 
 use utils\Form;
 
-require_once __DIR__ . '/../components/head.php';
 require_once __DIR__ . '/../../../../vendor/autoload.php';
 ?>
 
@@ -33,7 +32,7 @@ $newForm->formLabel(labelID: "name", labelClass: "form-label", labelTitle: "Name
 $newForm->formField(inputID: "name", inputName: "studentName", inputType: "text", inputClass: "form-control", inputPlaceholder: "Enter first and last names");
 if (isset($_SESSION['errors']['studentName'])) {
     $alertMsg = sprintf("%s", $_SESSION['errors']['studentName']);
-    $newForm->fieldErrorAlert(alertClass: "is-invalid", alertMsg: $alertMsg);
+    $newForm->fieldErrorAlert(alertClass: "text-red is-invalid", alertMsg: $alertMsg);
 }
 
 /** Form Field: Student Email */
@@ -69,7 +68,16 @@ $newForm->formLabel(labelID: "image", labelClass: "form-label", labelTitle: "Cli
 $newForm->formFileUpload(fileInputID: "image", fileInputName: "studentImage", acceptFileType: "image/png", fileInputClass: "form-control", multiple: null, disabled: null);
 if (isset($_SESSION['errors']['studentImage'])) {
     $alertMsg = sprintf("%s", $_SESSION['errors']['studentImage']);
-    $newForm->fieldErrorAlert(alertClass: "is-invalid", alertMsg: $alertMsg);
+    $newForm->fieldErrorAlert(alertClass: "text-red is-invalid", alertMsg: $alertMsg);
+}
+
+/** Form Field: Registration Date */
+$newForm->formDiv(divID: "regDate", divClass: "form-group mb-3");
+$newForm->formLabel(labelID: "regDate", labelClass: "form-label", labelTitle: "Registration Date:");
+$newForm->formField(inputID: "regDate", inputName: "regDate", inputType: "date", inputClass: "form-control", inputPlaceholder: "Enter registration date");
+if (isset($_SESSION['errors']['regDate'])) {
+    $alertMsg = sprintf("%s", $_SESSION['errors']['regDate']);
+    $newForm->fieldErrorAlert(alertClass: "text-red is-invalid", alertMsg: $alertMsg);
 }
 
 unset($_SESSION['errors']);
@@ -81,8 +89,4 @@ $newForm->formButton(buttonID: "submitButton", buttonName: "submitcreateUser", b
 // Render Form
 // echo $newForm->render();
 echo $newForm;
-?>
-
-<?php
-require_once __DIR__ . '/../components/footer.php';
 ?>

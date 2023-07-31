@@ -1,34 +1,6 @@
-/* global styles */
-
-.left-container {
-  flex: 1;
-  width: 40%;
-  margin-left: 10px;
-  margin-right: 10px;
-  float: left;
-}
-
-.right-container {
-  flex: 1;
-  width: 60%;
-  margin-left: 10px;
-  margin-right: 10px;
-  float: right;
-}
-
-@media (max-width: 700px) {
-  .left-container,
-  .right-container {
-    width: 100%;
-    float: none;
-  }
-}
-
-/*indexstyles */
 .flex {
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
 .flex-left {
@@ -109,12 +81,6 @@
   display: flex;
   gap: 2px;
 }
-
-/* .btn {
-  color: #000;
-  padding: 3px 3px;
-  text-align: center;
-} */
 
 .btn-primary {
   color: #fff;
