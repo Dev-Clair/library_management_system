@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace app;
 
-use app\Exceptions\RouteNotFoundException;
+use app\Exception\RouteNotFoundException;
+use app\Controller\UserController;
+use app\Controller\BookController;
+use app\Controller\TransactionController;
 
 class Router
 {

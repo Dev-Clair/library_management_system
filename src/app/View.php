@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace app;
 
 use stdClass;
+use app\Exception\ViewNotFoundException;
 
 class View extends stdClass
 {
     const VIEWS_TEMPLATES_HEAD_PHP = "./View/components/head.php";
     const VIEWS_TEMPLATES_NAVIGATION_PHP = "./View/components/nav.php";
     const VIEWS_TEMPLATES_STATUS_PHP = "./View/components/status.php";
-    const VIEWS_TEMPLATES_PAGE_CONTENT_PHP = "./View/components/pageContent.php";
     const VIEWS_TEMPLATES_FOOTER_PHP = "./View/components/footer.php";
     const PROPERTY_NOT_FOUND_ALERT = "{{PROPERTY NOT FOUND!!!}}";
     const CONTENT_PLACE_HOLDER = '{{PAGE_CONTENT}}';
 
-    public function __construct(private string $viewActionName, private string $viewClassName)
+    public function __construct(protected string $view, protected array $params = [])
     {
     }
 
@@ -28,82 +28,30 @@ class View extends stdClass
             return self::PROPERTY_NOT_FOUND_ALERT;
         }
     }
-    public function render(string $pathToView, array $dataToRender): string
+
+    public static function make(string $view, array $params = [])
     {
-        $this->renderData($dataToRender);
-        $absoluteFilePath = __DIR__ . '/../Views/' . $this->viewClassName . '/' . $pathToView . ".php";
-        if (file_exists($absoluteFilePath)) {
-            $pageHeader = $this->getPageHeader();
-            $pageContent = $this->getPageContent($absoluteFilePath);
-            $header = $this->replaceContentPlaceHolder($pageContent, $pageHeader);
-            $footer = $this->getPageFooter();
-            return $header . $footer;
+        return new static($view, $params);
+    }
+
+    public function render(): string
+    {
+        $viewPath = VIEW_PATH . '/' . $this->view . '.php';
+        if (!file_exists($viewPath)) {
+            throw new ViewNotFoundException();
         }
-        return '';
-    }
-
-    private function renderData(array $dataToRender): void
-    {
-        foreach ($dataToRender as $key => $data) {
-            $this->{$key} = $data;
-        }
-    }
-
-    public function getviewClassName(): string
-    {
-        return $this->viewClassName;
-    }
-
-    public function setViewClassName(string $viewClassName): void
-    {
-        $this->viewClassName = $viewClassName;
-    }
-
-    public function getViewActionName(): string
-    {
-        return $this->viewActionName;
-    }
-
-    public function setViewActionName(string $viewActionName): void
-    {
-        $this->viewActionName = $viewActionName;
-    }
-
-    private function getPageHeader(): string|false
-    {
-        $data = $this;
         ob_start();
         require_once __DIR__ . self::VIEWS_TEMPLATES_HEAD_PHP;
         require_once __DIR__ . self::VIEWS_TEMPLATES_NAVIGATION_PHP;
-        require_once __DIR__ . self::VIEWS_TEMPLATES_PAGE_CONTENT_PHP;
-        $pageHeader = ob_get_contents();
-        ob_end_clean();
-        return $pageHeader;
-    }
-
-    private function getPageContent(string $absoluteFilePath): string|false
-    {
-        $data = $this;
-        ob_start();
-        require_once $absoluteFilePath;
-        $pageContent = ob_get_contents();
-        ob_end_clean();
-        return $pageContent;
-    }
-
-    private function getPageFooter(): string|false
-    {
-        $data = $this;
-        ob_start();
+        require_once __DIR__ . self::VIEWS_TEMPLATES_STATUS_PHP;
+        include $viewPath;
         require_once __DIR__ . self::VIEWS_TEMPLATES_FOOTER_PHP;
-        $pageFooter = ob_get_contents();
-        ob_end_clean();
-        return $pageFooter;
+
+        return (string) ob_get_clean();
     }
 
-    private function replaceContentPlaceHolder(false|string $pageContent, false|string $pageHeader): string|array|false
+    public function __toString(): string
     {
-        $header = str_replace(self::CONTENT_PLACE_HOLDER, $pageContent, $pageHeader);
-        return $header;
+        return $this->render();
     }
 }

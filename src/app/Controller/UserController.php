@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace app\Controller;
 
 use app\Model\UserModel;
-use app\Controller\Controller;
+use app\View;
 
 class UserController extends Controller
 {
-    protected function index()
+    protected function index(): View
     {
         /**
          * Logic to retrieve users and pass them to the view
@@ -21,12 +21,10 @@ class UserController extends Controller
         $users = $userModel->retrieveAllUsers(tableName: $tableName);
 
         // Render the view for displaying users
-        // require __DIR__ . '/../Views/user/index.php';
-        $this->dataToRender['users'] = $users;
-        echo $this->view->render('index', $this->dataToRender);
+        return View::make('users.index', ["users" => $users]);
     }
 
-    protected function create()
+    protected function create(): View
     {
         /**
          * Logic for creating a new user.
@@ -34,9 +32,11 @@ class UserController extends Controller
          * Renders the view (views/user/create.php) that contains the HTML form to collect user information
          */
 
-        $basePath = str_replace($_SERVER['DOCUMENT_ROOT'], '', realpath(__DIR__ . '/../'));
-        $formAction = $basePath . '/Controller/UserController.php?action=store';
-        require __DIR__ . '/../View/user/create.php';
+        // $basePath = str_replace($_SERVER['DOCUMENT_ROOT'], '', realpath(__DIR__ . '/../'));
+        // $formAction = $basePath . '/Controller/UserController.php?action=store';
+        // require __DIR__ . '/../View/user/create.php';
+        // Render the view for creating users
+        return View::make('users.create');
     }
 
     protected function store()
