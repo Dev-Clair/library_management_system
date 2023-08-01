@@ -76,9 +76,11 @@ class UserController extends Controller
          * Renders the view (views/user/edit.php) containing the edit form, and pre-fills the form fields with the user's current information
          * Redirect back to the index page with success or error message
          */
-        $basePath = str_replace($_SERVER['DOCUMENT_ROOT'], '', realpath(__DIR__ . '/../'));
-        $formAction = $basePath . '/Controller/UserController.php?action=update';
-        require __DIR__ . '/../View/user/edit.php';
+        // $basePath = str_replace($_SERVER['DOCUMENT_ROOT'], '', realpath(__DIR__ . '/../'));
+        // $formAction = $basePath . '/Controller/UserController.php?action=update';
+        // require __DIR__ . '/../View/user/edit.php';
+        // Render the view for updating users
+        return View::make('users.edit');
     }
 
     protected function update()
