@@ -9,7 +9,7 @@ use app\Model\UserModel;
 
 class UserController extends Controller
 {
-    protected function index(): View
+    public function index(): View
     {
         /**
          * Logic to retrieve users and pass them to the view
@@ -21,10 +21,10 @@ class UserController extends Controller
         $users = $userModel->retrieveAllUsers(tableName: $tableName);
 
         // Render the view for displaying users
-        return View::make('user.index', ["users" => $users])->pageTitle('Users');
+        return View::make('user.index', ["users" => $users])->addProperty('pageTitle', 'Users');
     }
 
-    protected function create(): View
+    public function create(): View
     {
         /**
          * Logic for creating a new user.
@@ -36,10 +36,10 @@ class UserController extends Controller
         // $formAction = $basePath . '/Controller/UserController.php?action=store';
         // require __DIR__ . '/../View/user/create.php';
         // Render the view for creating users
-        return View::make('user.create');
+        return View::make('user.create')->addProperty('pageTitle', 'Users');
     }
 
-    protected function store()
+    public function store()
     {
         /**
          * Logic to store the newly created user in the database.
@@ -68,7 +68,7 @@ class UserController extends Controller
         header('Location: ./../View/user/index.php');
     }
 
-    protected function edit()
+    public function edit()
     {
         /** 
          * Shows a form to edit an existing user's information.
@@ -76,14 +76,24 @@ class UserController extends Controller
          * Renders the view (views/user/edit.php) containing the edit form, and pre-fills the form fields with the user's current information
          * Redirect back to the index page with success or error message
          */
+        // Retrieve Existing Record Data
+        $databaseName = "libraryRecords";
+        $userModel = new UserModel(databaseName: $databaseName);
+        $tableName = "users";
+        $fieldName = "";
+        $fieldValue = "";
+        $user = $userModel->retrieveSingleUser(tableName: $tableName, fieldName: $fieldName, fieldValue: $fieldValue);
+
         // $basePath = str_replace($_SERVER['DOCUMENT_ROOT'], '', realpath(__DIR__ . '/../'));
         // $formAction = $basePath . '/Controller/UserController.php?action=update';
+
         // require __DIR__ . '/../View/user/edit.php';
+
         // Render the view for updating users
-        return View::make('user.edit')->pageTitle('Update User');
+        return View::make('user.edit', ["user" => $user])->addProperty('pageTitle', 'Users');
     }
 
-    protected function update()
+    public function update()
     {
         /**
          * Processes the data submitted through the edit form.
@@ -108,18 +118,10 @@ class UserController extends Controller
                 /** Image Field */
             }
         }
-        // Retrieve Existing Record Data
-        $databaseName = "libraryRecords";
-        $userModel = new UserModel(databaseName: $databaseName);
-        $tableName = "users";
-        $fieldName = "";
-        $fieldValue = "";
-        $users = $userModel->retrieveSingleUser(tableName: $tableName, fieldName: $fieldName, fieldValue: $fieldValue);
-
         header('Location: ./../View/user/index.php');
     }
 
-    protected function delete()
+    public function delete()
 
     {
         /**

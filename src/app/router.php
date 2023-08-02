@@ -36,15 +36,21 @@ class Router
     {
         $route = parse_url($requestUri, PHP_URL_PATH);
         $action = $this->routes[$requestMethod][$route] ?? null;
-        // var_dump($route, $action);
+        echo "<pre>";
+        var_dump($route);
+        // echo "\n";
+        var_dump($action);
+        // echo "\n";
+        var_dump($requestMethod);
+        echo "<pre>";
 
-        if (!$action) {
-            throw new RouteNotFoundException();
-        }
+        // if (!$action) {
+        //     throw new RouteNotFoundException();
+        // }
 
-        if (is_callable($action)) {
-            return call_user_func($action);
-        }
+        // if (is_callable($action)) {
+        //     return call_user_func($action);
+        // }
 
         if (is_array($action)) {
             [$class, $method] = $action;

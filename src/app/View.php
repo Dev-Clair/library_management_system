@@ -8,8 +8,8 @@ use app\Exception\ViewNotFoundException;
 
 class View
 {
-    private string $view;
-    private array $params = [];
+    protected string $view;
+    protected array $params = [];
 
     public function __construct(string $view, array $params = [])
     {
@@ -17,9 +17,9 @@ class View
         $this->params = $params;
     }
 
-    public function pageTitle(string $pageTitle): self
+    public function addProperty(string $property, mixed $value): self
     {
-        $this->params['pageTitle'] = $pageTitle;
+        $this->params[$property] = $value;
         return $this;
     }
 
