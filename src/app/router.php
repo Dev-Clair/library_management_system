@@ -34,9 +34,11 @@ class Router
 
     public function resolve(string $requestUri, string $requestMethod)
     {
-        echo "Trying to resolve route: $requestUri, Request Method: $requestMethod" . PHP_EOL;
+        echo "Trying to resolve route: $requestUri, Request Method: $requestMethod" . "<br>";
         $route = explode('?', $requestUri)[0];
+        echo "$route" . "<br>";
         $action = $this->routes[$requestMethod][$route] ?? null;
+        echo "$action" . "<br>";
 
         if (!$action) {
             throw new RouteNotFoundException();
