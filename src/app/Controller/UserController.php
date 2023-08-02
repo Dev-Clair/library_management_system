@@ -21,7 +21,7 @@ class UserController extends Controller
         $users = $userModel->retrieveAllUsers(tableName: $tableName);
 
         // Render the view for displaying users
-        return View::make('users.index', ["users" => $users])->pageTitle('Users');
+        return View::make('user.index', ["users" => $users])->pageTitle('Users');
     }
 
     protected function create(): View
@@ -36,7 +36,7 @@ class UserController extends Controller
         // $formAction = $basePath . '/Controller/UserController.php?action=store';
         // require __DIR__ . '/../View/user/create.php';
         // Render the view for creating users
-        return View::make('users.create');
+        return View::make('user.create');
     }
 
     protected function store()
@@ -80,7 +80,7 @@ class UserController extends Controller
         // $formAction = $basePath . '/Controller/UserController.php?action=update';
         // require __DIR__ . '/../View/user/edit.php';
         // Render the view for updating users
-        return View::make('users.edit')->pageTitle('Update User');
+        return View::make('user.edit')->pageTitle('Update User');
     }
 
     protected function update()
