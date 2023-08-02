@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace app\Controller;
 
-use app\Model\UserModel;
 use app\View;
+use app\Model\UserModel;
 
 class UserController extends Controller
 {
@@ -21,7 +21,7 @@ class UserController extends Controller
         $users = $userModel->retrieveAllUsers(tableName: $tableName);
 
         // Render the view for displaying users
-        return View::make('users.index', ["users" => $users]);
+        return View::make('users.index', ["users" => $users])->pageTitle('Users');
     }
 
     protected function create(): View
@@ -80,7 +80,7 @@ class UserController extends Controller
         // $formAction = $basePath . '/Controller/UserController.php?action=update';
         // require __DIR__ . '/../View/user/edit.php';
         // Render the view for updating users
-        return View::make('users.edit');
+        return View::make('users.edit')->pageTitle('Update User');
     }
 
     protected function update()

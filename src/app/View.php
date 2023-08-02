@@ -4,49 +4,46 @@ declare(strict_types=1);
 
 namespace app;
 
-use stdClass;
 use app\Exception\ViewNotFoundException;
 
-class View extends stdClass
+class View
 {
-    const VIEWS_TEMPLATES_HEAD_PHP = "./View/components/head.php";
-    const VIEWS_TEMPLATES_NAVIGATION_PHP = "./View/components/nav.php";
-    const VIEWS_TEMPLATES_STATUS_PHP = "./View/components/status.php";
-    const VIEWS_TEMPLATES_FOOTER_PHP = "./View/components/footer.php";
-    const PROPERTY_NOT_FOUND_ALERT = "{{PROPERTY NOT FOUND!!!}}";
-    const CONTENT_PLACE_HOLDER = '{{PAGE_CONTENT}}';
+    private string $view;
+    private array $params = [];
 
-    public function __construct(protected string $view, protected array $params = [])
+    public function __construct(string $view, array $params = [])
     {
+        $this->view = $view;
+        $this->params = $params;
     }
 
-    public function __get($name)
+    public function pageTitle(string $pageTitle): self
     {
-        if (property_exists($this, $name)) {
-            return $this->{$name};
-        } else {
-            return self::PROPERTY_NOT_FOUND_ALERT;
-        }
+        $this->params['pageTitle'] = $pageTitle;
+        return $this;
     }
 
-    public static function make(string $view, array $params = [])
+    public static function make(string $view, array $params = []): self
     {
         return new static($view, $params);
     }
 
-    public function render(): string
+    public function render(string $layout = 'layout.php'): string
     {
         $viewPath = VIEW_PATH . '/' . $this->view . '.php';
-        if (!file_exists($viewPath)) {
+        $layoutPath = VIEW_PATH . '/' . $layout;
+
+        if (!file_exists($viewPath) || !file_exists($layoutPath)) {
             throw new ViewNotFoundException();
         }
-        ob_start();
-        require_once __DIR__ . self::VIEWS_TEMPLATES_HEAD_PHP;
-        require_once __DIR__ . self::VIEWS_TEMPLATES_NAVIGATION_PHP;
-        require_once __DIR__ . self::VIEWS_TEMPLATES_STATUS_PHP;
-        include $viewPath;
-        require_once __DIR__ . self::VIEWS_TEMPLATES_FOOTER_PHP;
 
+        $pageTitle = $this->params['pageTitle'] ?? 'Log in';
+        $users = $this->params['users'] ?? [];
+        $transactions = $this->params['transactions'] ?? [];
+        $books = $this->params['books'] ?? [];
+
+        ob_start();
+        require_once $layoutPath;
         return (string) ob_get_clean();
     }
 
