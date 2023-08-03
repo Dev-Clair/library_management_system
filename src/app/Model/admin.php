@@ -7,7 +7,7 @@ namespace app\Model;
 use db\DbResource;
 use app\Model\AdminModel;
 
-require_once __DIR__ . '/../../../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 
 
 /** *************************************************************************************
@@ -48,6 +48,23 @@ $sql_query = "DROP DATABASE $databaseName";
  *   `Status` ENUM('Active', 'Inactive') DEFAULT 'Active',
  *   `Membership Expiry Date` DATE";
  * 
+ * books
+ * `Book ID` INT PRIMARY KEY AUTO_INCREMENT,
+ *   `Title` VARCHAR(100) NOT NULL,
+ *   `Author` VARCHAR(150) NOT NULL,
+ *   `ISBN` VARCHAR(20),
+ *   `Edition` VARCHAR(100) NOT NULL,
+ *   `No. Per Edition` INT NOT NULL,
+ *   `Library Section` VARCHAR(100) NOT NULL,
+ *   `Borrowability Status` ENUM('Borrowable', 'Reference Only') NOT NULL,
+ *   `Publication Year` INT(4),
+ *   `Publisher` VARCHAR(100),
+ *   `Genre` VARCHAR(50),
+ *   `Language` VARCHAR(50),
+ *   `Description` TEXT,
+ *   `Available Copies` INT,
+ *   `Cover Image URL` VARCHAR(255)";
+ * 
  * transactions
  * "`Transaction ID` INT PRIMARY KEY AUTO_INCREMENT,
  *   `User ID` INT,
@@ -61,31 +78,27 @@ $sql_query = "DROP DATABASE $databaseName";
  *  FOREIGN KEY (`User ID`) REFERENCES `users`(`User ID`),
  *   FOREIGN KEY (`Book ID`) REFERENCES `books`(`Book ID`)";
  */
-$tableName = "books";
-$fieldNames = "    `Book ID` INT PRIMARY KEY AUTO_INCREMENT,
-                    `Title` VARCHAR(100) NOT NULL,
-                    `Author` VARCHAR(150) NOT NULL,
-                    `ISBN` VARCHAR(20),
-                    `Edition` VARCHAR(100) NOT NULL,
-                    `No. Per Edition` INT NOT NULL,
-                    `Library Section` VARCHAR(100) NOT NULL,
-                    `Borrowability Status` ENUM('Borrowable', 'Reference Only') NOT NULL,
-                    `Publication Year` INT(4),
-                    `Publisher` VARCHAR(100),
-                    `Genre` VARCHAR(50),
-                    `Language` VARCHAR(50),
-                    `Description` TEXT,
-                    `Available Copies` INT,
-                    `Cover Image URL` VARCHAR(255)";
+$tableName = "transactions";
+$fieldNames = "`Transaction ID` INT PRIMARY KEY AUTO_INCREMENT,
+                `User ID` INT,
+                `Book ID` INT,
+                `Transaction Type` ENUM('Borrow', 'Return'),
+                `Transaction Date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                `Due Date` DATE,
+                `Return Date` DATE,
+                `Fine Amount` DECIMAL(10, 2),
+                `Additional Notes` TEXT,
+                FOREIGN KEY (`User ID`) REFERENCES `users`(`User ID`),
+                FOREIGN KEY (`Book ID`) REFERENCES `books`(`Book ID`)";
 
 $databaseName = "libraryrecords";
-// $conn = new AdminModel(databaseName: $databaseName);
-// $status = $conn->createTable(tableName: $tableName, fieldNames: $fieldNames);
-// if ($status) {
-//     echo "Creating new table `$tableName` in $databaseName returned: " . "true" . PHP_EOL;
-// } else {
-//     echo "Creating new table `$tableName` in $databaseName returned: " . "false" . PHP_EOL;
-// }
+$conn = new AdminModel(databaseName: $databaseName);
+$status = $conn->createTable(tableName: $tableName, fieldNames: $fieldNames);
+if ($status) {
+    echo "Creating new table `$tableName` in $databaseName returned: " . "true" . PHP_EOL;
+} else {
+    echo "Creating new table `$tableName` in $databaseName returned: " . "false" . PHP_EOL;
+}
 
 /** *************************************************************************************
  * 

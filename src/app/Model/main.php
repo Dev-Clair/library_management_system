@@ -8,7 +8,7 @@ use app\Model\UserModel;
 // use app\Model\BookModel;
 // use app\Model\TransactionModel;
 
-require __DIR__ . '/../../../vendor/autoload.php';
+require __DIR__ . '/../../vendor/autoload.php';
 
 
 /** *************************************************************************************

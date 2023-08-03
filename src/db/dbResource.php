@@ -18,7 +18,7 @@ class DbResource
      */
     private static function getConnection(?string $databaseName = null)
     {
-        $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
+        $dotenv = Dotenv::createImmutable(__DIR__);
         $dotenv->load();
 
         $conn = new DbConn(

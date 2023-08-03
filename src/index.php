@@ -10,7 +10,7 @@ require __DIR__ . '/vendor/autoload.php';
 use app\Router;
 use app\Exception\RouteNotFoundException;
 
-define('VIEW_PATH', __DIR__ . '/src/app/View');
+define('VIEW_PATH', __DIR__ . '/app/View');
 
 try {
     $router = new Router();
