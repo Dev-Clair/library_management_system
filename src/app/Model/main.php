@@ -16,9 +16,10 @@ require __DIR__ . '/../../../vendor/autoload.php';
  * Add Record to Table
  * 
  */
-$newRecord = []; // Record must be passed as an associative array
-$tableName = "";
-$databaseName = "";
+$regNo = time();
+$newRecord = ["Reg No." => $regNo, "Student Name" => "Wendy Aniogbu", "Email" => "wendy.aniogbu@gmail.com", "Course Name" => "Microbiology", "Registration Date" => "2023-08-03", "Graduation Date" => "2027-08-05"]; // Record must be passed as an associative array
+$tableName = "users";
+$databaseName = "libraryrecords";
 // $conn = new UserModel(databaseName: $databaseName);
 // $status = $conn->createUser(tableName: $tableName, sanitizedData: $newRecord);
 // if ($status) {
@@ -108,12 +109,12 @@ $databaseName = "";
  * Update Table Record
  * 
  */
-$record = []; // Record must be passed as an associative array
-$fieldName = "";
-$fieldValue = "";
+$record = ["Email" => "aniogbu.wendy@gmail.com"]; // Record must be passed as an associative array
+$fieldName = "Student Name";
+$fieldValue = "Wendy Aniogbu";
 
-$tableName = "";
-$databaseName = "";
+$tableName = "users";
+$databaseName = "libraryrecords";
 // $conn = new UserModel(databaseName: $databaseName);
 // $status = $conn->updateUser(tableName: $tableName, sanitizedData: $record, fieldName: $fieldName, fieldValue: $fieldValue);
 // if ($status) {

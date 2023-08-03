@@ -37,11 +37,6 @@ class View
             throw new ViewNotFoundException();
         }
 
-        $pageTitle = $this->params['pageTitle'] ?? 'Log in';
-        $users = $this->params['users'] ?? [];
-        $transactions = $this->params['transactions'] ?? [];
-        $books = $this->params['books'] ?? [];
-
         ob_start();
         require_once $layoutPath;
         return (string) ob_get_clean();
