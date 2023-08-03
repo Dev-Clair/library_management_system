@@ -19,22 +19,22 @@
         </thead>
         <tbody>
             <?php
-            if (!empty($users)) {
+            if (!empty($params['users'])) {
                 $count = 0;
                 foreach ($users as $row) {
                     $count++;
             ?>
                     <tr>
                         <td><?php echo $count; ?></td>
-                        <td><?php echo $row["regNo"]; ?></td>
-                        <td><?php echo $row["studentName"]; ?></td>
-                        <td><?php echo $row["email"]; ?></td>
-                        <td><?php echo $row["courseName"]; ?></td>
-                        <td><?php echo $row["regDate"]; ?></td>
-                        <td><?php echo $row["gradDate"]; ?></td>
+                        <td><?php echo $row["Reg No."]; ?></td>
+                        <td><?php echo $row["Student Name"]; ?></td>
+                        <td><?php echo $row["Email"]; ?></td>
+                        <td><?php echo $row["Course Name"]; ?></td>
+                        <td><?php echo $row["Registration Date"]; ?></td>
+                        <td><?php echo $row["Graduation Date"]; ?></td>
                         <td class="btn-group">
-                            <a href="./edit.php?studentid=<?php echo $row["regNo."]; ?>&coursename=<?php echo $row["courseName"]; ?>" class="btn btn-primary btn-sm ms-2">Update</a>
-                            <a href="./edit.php?studentid=<?php echo $row["regNo."]; ?>&coursename=<?php echo $row["courseName"]; ?>" class="btn btn-danger btn-sm">Delete</a>
+                            <a href="./edit.php?studentid=<?php echo $row["Reg No."]; ?>&coursename=<?php echo $row["Course Name"]; ?>" class="btn btn-primary btn-sm ms-2">Update</a>
+                            <a href="./edit.php?studentid=<?php echo $row["Reg No."]; ?>&coursename=<?php echo $row["Course Name"]; ?>" class="btn btn-danger btn-sm">Delete</a>
                         </td>
                     </tr>
                 <?php
