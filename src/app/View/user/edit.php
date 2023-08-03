@@ -1,12 +1,10 @@
-<!-- views/user/edit.php -->
 <?php
+// views/user/edit.php
+
+declare(strict_types=1);
 
 use utils\Form;
 
-require_once __DIR__ . '/../../../../vendor/autoload.php';
-?>
-
-<?php
 // Instantiate Form and Create Form Members
 $newForm = new Form();
 
@@ -89,4 +87,3 @@ $newForm->formButton(buttonID: "submitButton", buttonName: "submiteditUser", but
 // Render Form
 // echo $newForm->render();
 echo $newForm;
-?>
