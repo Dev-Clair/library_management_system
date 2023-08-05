@@ -6,7 +6,7 @@ namespace app\Controller;
 
 use app\View\View;
 
-class MainController extends Controller
+class MainController extends AbsController
 {
     public function index(): View
     {

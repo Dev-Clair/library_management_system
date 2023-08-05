@@ -4,7 +4,7 @@
 
 <head>
     <?php
-    include __DIR__ . '/';
+    require __DIR__ . '/';
     ?>
 </head>
 

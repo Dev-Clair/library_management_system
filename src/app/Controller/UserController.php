@@ -7,7 +7,7 @@ namespace app\Controller;
 use app\View\View;
 use app\Model\UserModel;
 
-class UserController extends Controller
+class UserController extends AbsController
 {
     public function index(): View
     {

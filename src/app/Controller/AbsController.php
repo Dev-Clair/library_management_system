@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace app\Controller;
 
-abstract class Controller implements ControllerInterface
+abstract class AbsController implements IntController
 {
     abstract public function index();
 

@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace app\Controller;
 
 use app\Model\BookModel;
-use app\Controller\Controller;
 
-class BookController extends Controller
+class BookController extends AbsController
 {
     public function index()
     {
