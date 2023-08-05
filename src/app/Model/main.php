@@ -16,8 +16,17 @@ require __DIR__ . '/../../vendor/autoload.php';
  * Add Record to Table
  * 
  */
-$regNo = time();
-$newRecord = ["Reg No." => $regNo, "Student Name" => "Wendy Aniogbu", "Email" => "wendy.aniogbu@gmail.com", "Course Name" => "Microbiology", "Registration Date" => "2023-08-03", "Graduation Date" => "2027-08-05"]; // Record must be passed as an associative array
+$userID = time();
+$newRecord = [
+    "User ID" => $userID,
+    "First Name" => "Wendy",
+    "Last Name" => "Aniogbu",
+    "Email" => "aniogbu.wendy@yahoo.com",
+    "Phone Number" => "09150515435",
+    "Address" => "C94, C6 Street Nicon Town Estate",
+    "Date of Birth" => "2001-03-24",
+    "Membership Expiry Date" => "2024-08-18"
+]; // Record must be passed as an associative array
 $tableName = "users";
 $databaseName = "libraryrecords";
 // $conn = new UserModel(databaseName: $databaseName);
@@ -109,9 +118,12 @@ $databaseName = "";
  * Update Table Record
  * 
  */
-$record = ["Email" => "aniogbu.wendy@gmail.com"]; // Record must be passed as an associative array
-$fieldName = "Student Name";
-$fieldValue = "Wendy Aniogbu";
+$record = [
+    "Date of Birth" => "1995-05-17",
+    "Membership Expiry Date" => "2025-07-20"
+]; // Record must be passed as an associative array
+$fieldName = "Email";
+$fieldValue = "aniogbu.samuel@yahoo.com";
 
 $tableName = "users";
 $databaseName = "libraryrecords";
