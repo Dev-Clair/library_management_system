@@ -36,48 +36,39 @@ $sql_query = "DROP DATABASE $databaseName";
  * 
  * Create Tables
  * 
- * users
- *   "`User ID` INT PRIMARY KEY AUTO_INCREMENT,
- *   `First Name` VARCHAR(50) NOT NULL,
- *   `Last Name` VARCHAR(50) NOT NULL,
- *   `Email` VARCHAR(100) NOT NULL,
- *   `Phone Number` VARCHAR(20),
- *   `Address` VARCHAR(255),
- *   `Date of Birth` DATE,
- *   `Registration Date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
- *   `Status` ENUM('Active', 'Inactive') DEFAULT 'Active',
- *   `Membership Expiry Date` DATE";
- * 
- * books
- * `Book ID` INT PRIMARY KEY AUTO_INCREMENT,
- *   `Title` VARCHAR(100) NOT NULL,
- *   `Author` VARCHAR(150) NOT NULL,
- *   `ISBN` VARCHAR(20),
- *   `Edition` VARCHAR(100) NOT NULL,
- *   `No. Per Edition` INT NOT NULL,
- *   `Library Section` VARCHAR(100) NOT NULL,
- *   `Borrowability Status` ENUM('Borrowable', 'Reference Only') NOT NULL,
- *   `Publication Year` INT(4),
- *   `Publisher` VARCHAR(100),
- *   `Genre` VARCHAR(50),
- *   `Language` VARCHAR(50),
- *   `Description` TEXT,
- *   `Available Copies` INT,
- *   `Cover Image URL` VARCHAR(255)";
- * 
- * transactions
- * "`Transaction ID` INT PRIMARY KEY AUTO_INCREMENT,
- *   `User ID` INT,
- *   `Book ID` INT,
- *   `Transaction Type` ENUM('Borrow', 'Return'),
- *   `Transaction Date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
- *   `Due Date` DATE,
- *  `Return Date` DATE,
- *  `Fine Amount` DECIMAL(10, 2),
- *   `Additional Notes` TEXT,
- *  FOREIGN KEY (`User ID`) REFERENCES `users`(`User ID`),
- *   FOREIGN KEY (`Book ID`) REFERENCES `books`(`Book ID`)";
+ *
  */
+
+$tableName = "users";
+$fieldNames = "`User ID` INT PRIMARY KEY AUTO_INCREMENT,
+               `First Name` VARCHAR(50) NOT NULL,
+               `Last Name` VARCHAR(50) NOT NULL,
+               `Email` VARCHAR(100) NOT NULL,
+               `Phone Number` VARCHAR(20),
+               `Address` VARCHAR(255),
+               `Date of Birth` DATE,
+               `Registration Date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+               `Status` ENUM('Active', 'Inactive') DEFAULT 'Active',
+               `Membership Expiry Date` DATE";
+
+$tableName = "books";
+$fieldNames = "`Book ID` INT PRIMARY KEY AUTO_INCREMENT,
+                `Title` VARCHAR(100) NOT NULL,
+                `Author` VARCHAR(150) NOT NULL,
+                `ISBN` VARCHAR(20),
+                `Edition` VARCHAR(100) NOT NULL,
+                `No. Per Edition` INT NOT NULL,
+                `Library Section` VARCHAR(100) NOT NULL,
+                `Borrowability Status` ENUM('Borrowable', 'Reference Only') NOT NULL,
+                `Publication Year` INT(4),
+                `Publisher` VARCHAR(100),
+                `Genre` VARCHAR(50),
+                `Language` VARCHAR(50),
+                `Description` TEXT,
+                `Available Copies` INT,
+                `Cover Image URL` VARCHAR(255)";
+
+
 $tableName = "transactions";
 $fieldNames = "`Transaction ID` INT PRIMARY KEY AUTO_INCREMENT,
                 `User ID` INT,
@@ -91,14 +82,14 @@ $fieldNames = "`Transaction ID` INT PRIMARY KEY AUTO_INCREMENT,
                 FOREIGN KEY (`User ID`) REFERENCES `users`(`User ID`),
                 FOREIGN KEY (`Book ID`) REFERENCES `books`(`Book ID`)";
 
-$databaseName = "libraryrecords";
-$conn = new AdminModel(databaseName: $databaseName);
-$status = $conn->createTable(tableName: $tableName, fieldNames: $fieldNames);
-if ($status) {
-    echo "Creating new table `$tableName` in $databaseName returned: " . "true" . PHP_EOL;
-} else {
-    echo "Creating new table `$tableName` in $databaseName returned: " . "false" . PHP_EOL;
-}
+$databaseName = "";
+// $conn = new AdminModel(databaseName: $databaseName);
+// $status = $conn->createTable(tableName: $tableName, fieldNames: $fieldNames);
+// if ($status) {
+//     echo "Creating new table `$tableName` in $databaseName returned: " . "true" . PHP_EOL;
+// } else {
+//     echo "Creating new table `$tableName` in $databaseName returned: " . "false" . PHP_EOL;
+// }
 
 /** *************************************************************************************
  * 
@@ -136,8 +127,8 @@ $tableName = "";
  * Drop Tables
  * 
  */
-$databaseName = "libraryrecords";
-$tableName = "transactions";
+$databaseName = "";
+$tableName = "";
 // $conn = new AdminModel(databaseName: $databaseName);
 // $status = $conn->dropTable(tableName: $tableName);
 // if ($status) {
